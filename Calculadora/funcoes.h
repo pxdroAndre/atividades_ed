@@ -3,11 +3,43 @@
 #include <string.h>
 #include <stdlib.h>
 
-// TODO : FUNÇÃO PARA EXTENDER BINARIO (DEIXAR ELES DO MESMO TAMANHO PARA FAZER O CALCULO)
-
-// TODO : FUNÇÃO PARA CONVERTER DE BINARIO PARA GRAY
-
-// TODO : FUNÇÃO PARA CONVERTER DE GRAY PARA BINARIO
+void empilhar_num (char *entrada, PilhaString *pilha_num, PilhaChar *pilha_op, int index_Op, int index_num)
+{
+    // printf("index_num: %d index_Op: %d\n", index_num, index_Op);
+    // printf("%d\n", strlen(entrada));
+    if (index_num == (strlen (entrada)-1))
+    {
+        // printf("fim\n");
+        return;
+    }
+    if (index_num == 100000100)
+    {
+        printf ("Erro no operador\n");
+        return;
+    }
+    if ((index_Op!=0) && (index_num == ((index_Op * 18) + (index_Op-1))))
+    {
+        // printf("op: %c\n", entrada[index_num]);
+        if ((entrada[index_num]!= '+') && (entrada[index_num]!= '-') && (entrada[index_num]!= '*') && (entrada[index_num]!= '/') && (entrada[index_num]!= '+') && (entrada[index_num]!= '*')) {
+            return empilhar_num (entrada, pilha_num, pilha_op, index_Op, 100000100);
+        }
+        // printf("op: %c\n", entrada[index_num]);
+        pushChar (pilha_op, entrada[index_num]);
+        return empilhar_num (entrada, pilha_num, pilha_op, index_Op, index_num+1);
+    }
+    char binario[19];
+    // printf("a\n");
+    for (int i = 0; i<19 && index_num < strlen(entrada); i++)
+    {
+        // printf("index_num: %d i: %d\n", index_num, i);
+        binario[i] = entrada[index_num];
+        index_num++;
+    }
+    binario[18] = '\0';
+    // printf("binario: %s\n", binario);
+    pushString (pilha_num, binario);
+    empilhar_num(entrada, pilha_num, pilha_op, index_Op+1, index_num-1);
+}
 
 void inverterString(char* binario)
 {
