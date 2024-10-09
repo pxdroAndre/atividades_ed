@@ -9,7 +9,12 @@
 int main()
 {
   // TESTE PARA SOMA DE BINARIOS
+  char entrada[120] = {'\0'};
+  scanf("%s", entrada);
+  tamanho = strlen(entrada);
+  
 
+  
   PilhaString numerosString;
 
   numerosString.topo = -1;
