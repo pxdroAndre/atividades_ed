@@ -37,16 +37,31 @@ void soma(int a[], int b[], int c[]){
             printf("pqp\n");
         }
     }
-    printf("Resultado = ");
+    printf("Resultado da soma = ");
     for(int i = 0; i < 5; i++){
         printf("%d", c[i]);
     }
     return;
 }
 
-//TA FALTANDO
+//AGORA FUNCIONA
 void sub(int a[], int b[], int c[]){
-    
+        for(int i = 4; i > 0; i--){
+            if(b[i] == 0){
+                b[i] = 1;
+            }
+            else{
+                b[i] = 0;
+            }
+        }
+        int aux[5] = {0,0,0,0,1};
+        soma(b,aux,c);
+
+        for(int i = 1; i < 5; i++){
+            b[i] = c[i];
+        }
+
+        soma(a, b, c);
 }
 
 //pra ver se é soma subtração esses caralho mas ta incompleto so funciona de soma
