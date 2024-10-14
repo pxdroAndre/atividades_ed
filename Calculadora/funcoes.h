@@ -24,6 +24,8 @@ void corrigir_decimal(char* binario)
         strcat(binario, parteDecimal);
         binario[0] = sinal;
     }
+    free(parteInteira);
+    free(parteDecimal);
 
 }
 
@@ -285,9 +287,7 @@ char* dividirBinarios(char* bin1, char* bin2)
             condicao = 1;
 
             char* subtracao = (char*) calloc(strlen(dividendo) + 1, sizeof(char));
-            printf("%s %d %s %d\n", dividendo, strlen(dividendo), bin2, strlen(bin2));
             strcpy(subtracao, sub(dividendo, bin2));
-            printf("subtração: %s\n", subtracao);
             strcpy(dividendo, subtracao);
 
             free(subtracao);
