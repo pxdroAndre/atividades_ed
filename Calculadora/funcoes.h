@@ -266,11 +266,28 @@ char* sub(char* a, char* b)
 
 char* dividirBinarios(char* bin1, char* bin2)
 { 
+    char sinal;
+    if (bin1[0] == '1' && bin2[0] == '1')
+    {
+        sinal = '0';
+    }
+    else if ((bin1[0] == '0' && bin2[0] == '1') || (bin1[0] == '1' && bin2[0] == '0'))
+    {
+        sinal = '1';
+    }
+    else
+    {
+        sinal = '0';
+    }
+    
+
     int tam_bin1 = strlen(bin1);
 
     char* resultado = (char*) malloc((tam_bin1 + 1) * sizeof(char));
     char* dividendo = (char*) calloc((50),  sizeof(char));
     resultado[0] = '\0';
+
+    strncpy(bin2, bin2 + 1, strlen(bin2));
     
     remover_zeros_esquerda(bin2);
 
@@ -278,7 +295,7 @@ char* dividirBinarios(char* bin1, char* bin2)
     int j = 0;
     int condicao = 0;
 
-    for (i = 0; i <= tam_bin1 + 8; i++)
+    for (i = 1; i <= tam_bin1 + 8; i++)
     {
 
         int compara = comparar_binarios(dividendo, bin2);
@@ -309,15 +326,17 @@ char* dividirBinarios(char* bin1, char* bin2)
             if (i > 18) dividendo[tamanho] = '0';
             else dividendo[tamanho] = bin1[i];
 
-            if (i == 19) resultado[j] = '.';
-            else resultado[j] = '0';
+            resultado[j] = '0';
 
             j++;
         }
     }
+
     resultado[j] = '\0';
 
     free(dividendo);
+    extender_binario(resultado, 18);
+    resultado[0] = sinal;
 
     return resultado;
 }
