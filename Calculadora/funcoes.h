@@ -3,31 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-// serve para tirar a parte decimal que passa de 99
-void corrigir_decimal(char* binario)
-{
-    char um[11] = {"0000000001"};
-    char sinal = binario[0];
-    char* parteInteira = (char*) malloc((11) * sizeof(char));
-    char* parteDecimal = (char*) malloc((9) * sizeof(char));
 
-    strncpy(parteInteira, binario + 1, 10);
-    strncpy(parteDecimal, binario + 11, 7);
-    parteInteira[10] = '\0';
-    parteDecimal[7] = '\0';
-
-    if (comparar_binarios(parteDecimal, "1100011"))
-    {
-        strcpy(parteDecimal, sub(parteDecimal, "1100011"));
-        strcpy(parteInteira, somarBinarios(parteInteira, um));
-        strcpy(binario, parteInteira);
-        strcat(binario, parteDecimal);
-        binario[0] = sinal;
-    }
-    free(parteInteira);
-    free(parteDecimal);
-
-}
 
 void extender_binario(char* binario, int tamanhobin2) 
 {
@@ -89,43 +65,22 @@ void remover_zeros_esquerda(char* binario)
     }
 }
 
-void empilhar_num (char *entrada, PilhaString *pilha_num, PilhaChar *pilha_op, int index_Op, int index_num)
+void imprimir_ops(PilhaChar pilha_op)
 {
-    // printf("index_num: %d index_Op: %d\n", index_num, index_Op);
-    // printf("%d\n", strlen(entrada));
-    if (index_num == (strlen (entrada)-1))
-    {
-        // printf("fim\n");
-        return;
-    }
-    if (index_num == 100000100)
-    {
-        printf ("Erro no operador\n");
-        return;
-    }
-    if ((index_Op!=0) && (index_num == ((index_Op * 18) + (index_Op-1))))
-    {
-        // printf("op: %c\n", entrada[index_num]);
-        if ((entrada[index_num]!= '+') && (entrada[index_num]!= '-') && (entrada[index_num]!= '*') && (entrada[index_num]!= '/') && (entrada[index_num]!= '+') && (entrada[index_num]!= '*')) {
-            return empilhar_num (entrada, pilha_num, pilha_op, index_Op, 100000100);
-        }
-        // printf("op: %c\n", entrada[index_num]);
-        pushChar (pilha_op, entrada[index_num]);
-        return empilhar_num (entrada, pilha_num, pilha_op, index_Op, index_num+1);
-    }
-    char binario[19];
-    // printf("a\n");
-    for (int i = 0; i<19 && index_num < strlen(entrada); i++)
-    {
-        // printf("index_num: %d i: %d\n", index_num, i);
-        binario[i] = entrada[index_num];
-        index_num++;
-    }
-    binario[18] = '\0';
-    // printf("binario: %s\n", binario);
-    pushString (pilha_num, binario);
-    empilhar_num(entrada, pilha_num, pilha_op, index_Op+1, index_num-1);
-}
+  for (int i = pilha_op.topo; i>-1; i--)
+  {
+    printf("op[%d]: %c\n", i, pilha_op.characters[i]);
+  }
+} 
+
+
+void imprimir_bins(PilhaString pilha_num)
+{
+  for (int i = pilha_num.topo; i>-1; i--)
+  {
+    printf("bin[%d]: %s\n", i, pilha_num.strings[i]);
+  }
+} 
 
 void inverterString(char* binario)
 {
@@ -138,131 +93,105 @@ void inverterString(char* binario)
   }
 }
 
-char* somarBinarios(char* bin1, char* bin2)
-{
-  char* resultado = (char*) malloc(33 * sizeof(char));
-  char valorSomaAnterior = '0';
-  int j = 0;
-  int tamanhoStrings = strlen(bin1);
-  for (int i = tamanhoStrings - 1; i >= 0; i--)
-  {
-    // calculo 0 + 0 + somaAnterior
-    if (bin1[i] == '0' && bin2[i] == '0')
-    {
-      if (valorSomaAnterior = '0')
-      {
-        resultado[j] = '0';
-        valorSomaAnterior = '0';
-      }
-      else
-      {
-        resultado[j] = '1';
-        valorSomaAnterior = '0';
-      }
+
+//TA FUNCIONANDO  A = BINARIO 1  B = BINARIO 2  C = RESULTADO
+void soma(char a[], char b[], char c[]){
+    int extra = 0;
+    printf("somando %s e %s\n", a, b);
+    for(int i = 17; i > 0; i--){
+        if((a[i] == '1' && b[i] == '0'  && extra == 0) || (a[i] == '0' && b[i] == '1' && extra == 0)){
+            c[i] = '1';
+        }
+        else if(a[i] == '1' && b[i] == '1' && extra == 0){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 0){
+            c[i] = '0';
+        }
+        else if((a[i] == '1' && b[i] == '0'  && extra == 1) || (a[i] == '0' && b[i] == '1' && extra == 1)){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '1' && b[i] == '1'  && extra == 1){
+            c[i] = '1';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 1){
+            c[i] = '1';
+            extra = 0;
+        }
+        // printf("c[%d] = %c\n", i,c[i]);
     }
-
-    // calculo 1 + 0 + somaAnterior
-    else if ((bin1[i] == '1' && bin2[i] == '0') || (bin1[i] == '0' && bin2[i] == '1'))
-    {
-      if (valorSomaAnterior == '0')
-      {
-        resultado[j] = '1';
-        valorSomaAnterior = '0';
-      }
-      else
-      {
-        resultado[j] = '0';
-        valorSomaAnterior = '1';
-      }
-    }
-
-    // calculo 1 + 1 + somaAnterior
-    else if (bin1[i] == '1' && bin2[i] == '1')
-    {
-      if (valorSomaAnterior == '0')
-      {
-        resultado[j] = '0';
-        valorSomaAnterior = '1';
-      }
-      else
-      {
-        resultado[j] = '1';
-        valorSomaAnterior = '1';
-      }
-    }
-
-    
-
-    j++;
-
-
-    // verificando overflow
-    if (valorSomaAnterior == '1' && i == 0)
-    {
-      printf("OVERFLOW\n");
-      resultado[j] = '1';
-    }
-
-  }
-
-  resultado[++j] = '\0';
-  inverterString(resultado);
-
-  return resultado;
+    printf("resultado = %s \n", c);
+    return;
 }
 
-char* sub(char* a, char* b)
-{
-    int tamanho = strlen(a);
-    char* resultado = (char*) malloc((tamanho + 1) * sizeof(char));
-    char* a_copia = (char*) malloc((tamanho + 1) * sizeof(char));
-    strcpy(a_copia, a);
-    int roubo = 0;
-    int j = 0;
+void sub(char a[], char b[], char c[]){
+        for(int i = 17; i > 0; i--){
+            if(b[i] == '0'){
+                b[i] = '1';
+            }
+            else{
+                b[i] = '0';
+            }
+        }
+        printf("b depois da inversão = %s\n", b);
+        char aux[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'};
+        soma(b,aux,c);
+        printf("voltei da primeira soma\n");
 
-    for (int i = tamanho - 1; i >= 0; i--)
-    {
-        // Aplica o roubo se houver e ajusta o valor de a_copia
-        if (roubo == 1 && a_copia[i] == '1')
-        {
-            a_copia[i] = '0';
-            roubo = 0;
+        for(int i = 18; i > 0; i--){
+            b[i] = c[i];
         }
-        else if (roubo == 1 && a_copia[i] == '0')
-        {
-            a_copia[i] = '1'; // Precisa continuar com o roubo
-        }
-        
-        // Realiza a subtração bit a bit
-        if (a_copia[i] == '0' && b[i] == '0')
-        {
-            resultado[j] = '0';
-        }
-        else if (a_copia[i] == '1' && b[i] == '0')
-        {
-            resultado[j] = '1';
-        }
-        else if (a_copia[i] == '1' && b[i] == '1')
-        {
-            resultado[j] = '0';
-        }
-        else if (a_copia[i] == '0' && b[i] == '1')
-        {
-            resultado[j] = '1';
-            roubo = 1; // Indica que precisamos roubar da próxima posição
-        }
-        j++;
-    }
-
-    resultado[j] = '\0';
-
-    inverterString(resultado);
-    free(a_copia);
-
-    return resultado;
+        soma(a, b, c);
 }
 
-// TODO : FUNÇÃO PARA MULTIPLICAR BINARIOS
+// serve para tirar a parte decimal que passa de 99
+void corrigir_decimal(char* binario)
+{
+    char um[11] = {"0000000001"};
+    char sinal = binario[0];
+    char* parteInteira = (char*) malloc((11) * sizeof(char));
+    char* parteDecimal = (char*) malloc((9) * sizeof(char));
+
+    strncpy(parteInteira, binario + 1, 10);
+    strncpy(parteDecimal, binario + 11, 7);
+    parteInteira[10] = '\0';
+    parteDecimal[7] = '\0';
+
+    if (comparar_binarios(parteDecimal, "1100011"))
+    {
+        strcpy(parteDecimal, sub(parteDecimal, "1100011", c);
+        strcpy(parteInteira, somarBinarios(parteInteira, um));
+        strcpy(binario, parteInteira);
+        strcat(binario, parteDecimal);
+        binario[0] = sinal;
+    }
+    free(parteInteira);
+    free(parteDecimal);
+
+}
+
+void mult(char a[], char b[], char c[])
+{
+    char resultado[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'}; //Inicializa o resultado como zero
+    for(int i = 17; i >= 1; i--) //Loop para cada bit de 'b'
+    {
+        if(b[i] == '1')
+        {
+            char temp[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'}; //Cria um valor intermediário deslocado baseado na posição do bit de 'b'
+            for(int j = 17, k = i; j >= 1 && k >= 1; j--, k--) //Copia 'a' deslocado para a direita
+            {
+                temp[k] = a[j];
+            }
+            char aux[19];
+            soma(resultado, temp, aux); //Soma o valor intermediário ao resultado
+            strcpy(resultado, aux);
+        }
+    }
+    strcpy(c, resultado); //Copia o resultado final para 'c'
+}
 
 char* dividirBinarios(char* bin1, char* bin2)
 { 
@@ -304,7 +233,7 @@ char* dividirBinarios(char* bin1, char* bin2)
             condicao = 1;
 
             char* subtracao = (char*) calloc(strlen(dividendo) + 1, sizeof(char));
-            strcpy(subtracao, sub(dividendo, bin2));
+            strcpy(subtracao, sub(dividendo, bin2, c));
             strcpy(dividendo, subtracao);
 
             free(subtracao);
@@ -339,4 +268,94 @@ char* dividirBinarios(char* bin1, char* bin2)
     resultado[0] = sinal;
 
     return resultado;
+}
+
+
+//pra ver se é soma subtração esses caralho mas ta incompleto so funciona de soma
+void operacao(char a[], char b[], char c[], char sinal){
+    switch(sinal){
+        case '+': soma(a, b, c); break;
+        case '-': sub(a, b, c); break;
+        case '*': mult(a, b, c); break;
+        default: printf("Sinal inválido\n"); break;
+    }
+}
+
+
+void desempilha_e_opera(PilhaString *pilha_num, PilhaChar *pilha_op)
+{
+  char a[19] = {'\0'};
+  char b[19] = {'\0'};
+  char c[19];
+  c[18] = '\0';
+  char op;
+
+  strcpy(a, popString(pilha_num));
+  strcpy(b, popString(pilha_num));
+  printf("op: %c top: %d\n", op, pilha_op->topo);
+  op = popChar(pilha_op);
+  printf("op: %c top: %d\n", op, pilha_op->topo);
+  operacao(a,b,c,op);
+  pushString(pilha_num, c);
+}
+
+int calcula_preferencia(char op, int *preferencia)
+{
+  if ((op == '+') || (op == '-')) *preferencia = 1;
+  if ((op == '*') || (op == '/')) *preferencia = 2;
+  if ((op == '^')) *preferencia = 3;
+}
+
+void empilhar_num (char *entrada, PilhaString *pilha_num, PilhaChar *pilha_op, int index_Op, int index_num, int preferencia)
+{
+  int preferencia_atual = 0;
+  // printf("index_num: %d index_Op: %d\n", index_num, index_Op);
+  int tamanho = strlen(entrada);
+  // printf("strlen: %d\n", tamanho);
+  if (index_num==tamanho)
+  {
+    //para no fim da string
+    // printf("fim\n");
+    return ;
+  }
+  if (index_num == 100000100)
+  {
+    //tratamento de erro
+    printf ("Erro no operador\n");
+    return;
+  }
+  if ((index_Op!=0) && (((index_num-18) % 19)== 0) || (index_num == 18))
+  {
+    // printf("op: %c\n", entrada[index_num]);
+    if ((entrada[index_num]!= '+') && (entrada[index_num]!= '-') && (entrada[index_num]!= '*') && (entrada[index_num]!= '/') && (entrada[index_num]!= '+') && (entrada[index_num]!= '*')) 
+    {
+      printf("i: %d op: %c\n", index_num,entrada[index_num]);
+      return empilhar_num (entrada, pilha_num, pilha_op, index_Op, 100000100, preferencia);
+    }
+    // printf("op: %c\n", entrada[index_num+1]);
+    calcula_preferencia(entrada[index_num], &preferencia);
+    calcula_preferencia(entrada[index_num], &preferencia_atual);
+    if (preferencia_atual < preferencia)
+    {
+      desempilha_e_opera(pilha_num, pilha_op);
+    } 
+    preferencia = preferencia_atual;
+    pushChar (pilha_op, entrada[index_num]);
+    // printf("index_num: %d \n", index_num);
+    // printf("i: %d op: %c\n", index_num,entrada[index_num]);
+    return empilhar_num (entrada, pilha_num, pilha_op, index_Op, index_num+1, preferencia);
+  }
+  char binario[19];
+  // printf("a\n");
+  for (int i = 0; i<18 && index_num < strlen(entrada); i++)
+  {
+    // printf("index_num: %d i: %d\n", index_num, i);
+    binario[i] = entrada[index_num];
+    index_num++;
+  }
+  binario[18] = '\0';
+  printf("binario: %s\n", binario);
+  pushString (pilha_num, binario);
+  // printf("index_num: %d \n", index_num);
+  empilhar_num(entrada, pilha_num, pilha_op, index_Op+1, index_num, preferencia);
 }
