@@ -49,13 +49,18 @@ void sub(char a[], char b[], char c[]){
 }
 
 // Função para multiplicação
-void mult(char a[], char b[], char c[]){
-    char resultado[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'};
-    for(int i = 17; i >= 1; i--){ // Loop para cada bit de 'b'
-        if(b[i] == '1'){
-            char temp[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'};
-            for(int j = 17, k = i; j >= 1 && k >= 1; j--, k--){
-                temp[k] = a[j];
+void mult(char a[], char b[], char c[]) {
+    char resultado[19] = "000000000000000000"; // Inicializa o resultado como zero
+    for (int i = 17; i >= 1; i--) { // Loop para cada bit de 'b'
+        if (b[i] == '1') {
+            char temp[19] = "000000000000000000"; // Cria um valor intermediário
+            // Desloca 'a' baseado na posição do bit de 'b'
+            for (int j = 17; j >= 1; j--) {
+                if (j - (17 - i) >= 0) {
+                    temp[j] = a[j - (17 - i)];
+                } else {
+                    temp[j] = '0';
+                }
             }
             char aux[19];
             soma(resultado, temp, aux); // Soma o valor intermediário ao resultado
