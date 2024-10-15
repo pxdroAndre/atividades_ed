@@ -79,12 +79,11 @@ void inverterString(char* binario)
 }
 
 
-//TA FUNCIONANDO  A = BINARIO 1  B = BINARIO 2  C = RESULTADO
-void soma(char a[], char b[], char c[]){
+void somasubsoma(char a[], char b[], char c[]){
     int extra = 0;
-    printf("somando %s e %s\n", a, b);
-    for(int i = 17; i > 0; i--){
-        if((a[i] == '1' && b[i] == '0'  && extra == 0) || (a[i] == '0' && b[i] == '1' && extra == 0)){
+    printf("Somando somasubsoma %s e %s\n", a, b);
+    for(int i = 17; i > 0; i--){ // Considera o bit de sinal
+        if((a[i] == '1' && b[i] == '0' && extra == 0) || (a[i] == '0' && b[i] == '1' && extra == 0)){
             c[i] = '1';
         }
         else if(a[i] == '1' && b[i] == '1' && extra == 0){
@@ -94,11 +93,11 @@ void soma(char a[], char b[], char c[]){
         else if(a[i] == '0' && b[i] == '0' && extra == 0){
             c[i] = '0';
         }
-        else if((a[i] == '1' && b[i] == '0'  && extra == 1) || (a[i] == '0' && b[i] == '1' && extra == 1)){
+        else if((a[i] == '1' && b[i] == '0' && extra == 1) || (a[i] == '0' && b[i] == '1' && extra == 1)){
             c[i] = '0';
             extra = 1;
         }
-        else if(a[i] == '1' && b[i] == '1'  && extra == 1){
+        else if(a[i] == '1' && b[i] == '1' && extra == 1){
             c[i] = '1';
             extra = 1;
         }
@@ -106,13 +105,14 @@ void soma(char a[], char b[], char c[]){
             c[i] = '1';
             extra = 0;
         }
-        // printf("c[%d] = %c\n", i,c[i]);
+        printf("c[%d] = %c\n", i, c[i]);
     }
-    printf("resultado = %s \n", c);
+    c[18] = '\0'; // Certifique-se de que o último caractere seja o terminador de string
+    printf("Resultado soma = %s\n", c);
     return;
 }
 
-void sub(char a[], char b[], char c[]){
+void somasub(char a[], char b[], char c[]){
         for(int i = 17; i > 0; i--){
             if(b[i] == '0'){
                 b[i] = '1';
@@ -122,61 +122,140 @@ void sub(char a[], char b[], char c[]){
             }
         }
         printf("b depois da inversão = %s\n", b);
-        char aux[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'};
-        soma(b,aux,c);
+        char aux[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1','\0'};
+        somasubsoma(b,aux,c);
         printf("voltei da primeira soma\n");
 
         for(int i = 18; i > 0; i--){
             b[i] = c[i];
         }
-        soma(a, b, c);
+        somasubsoma(a, b, c);
 }
 
-// serve para tirar a parte decimal que passa de 99
-void corrigir_decimal(char* binario)
-{
-    char um[11] = {"0000000001"};
-    char sinal = binario[0];
-    char* parteInteira = (char*) malloc((11) * sizeof(char));
-    char* parteDecimal = (char*) malloc((9) * sizeof(char));
-
-    strncpy(parteInteira, binario + 1, 10);
-    strncpy(parteDecimal, binario + 11, 7);
-    parteInteira[10] = '\0';
-    parteDecimal[7] = '\0';
-
-    if (comparar_binarios(parteDecimal, "1100011"))
-    {
-        sub(parteDecimal, "1100011", parteDecimal);
-        soma(parteInteira, um, parteInteira);
-        strcpy(binario, parteInteira);
-        strcat(binario, parteDecimal);
-        binario[0] = sinal;
+void soma(char a[], char b[], char c[]){
+    if(a[0] != b[0]){
+        somasub(a,b,c);
+        return;
     }
-    free(parteInteira);
-    free(parteDecimal);
+    int extra = 0;
+    printf("Somando %s e %s\n", a, b);
+    for(int i = 17; i > 0; i--){ // Considera o bit de sinal
+        if((a[i] == '1' && b[i] == '0' && extra == 0) || (a[i] == '0' && b[i] == '1' && extra == 0)){
+            c[i] = '1';
+        }
+        else if(a[i] == '1' && b[i] == '1' && extra == 0){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 0){
+            c[i] = '0';
+        }
+        else if((a[i] == '1' && b[i] == '0' && extra == 1) || (a[i] == '0' && b[i] == '1' && extra == 1)){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '1' && b[i] == '1' && extra == 1){
+            c[i] = '1';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 1){
+            c[i] = '1';
+            extra = 0;
+        }
+        printf("c[%d] = %c\n", i, c[i]);
+    }
+    c[18] = '\0'; // Certifique-se de que o último caractere seja o terminador de string
+    printf("Resultado soma = %s\n", c);
+    return;
+}
+// Função para subtração
+void sub(char a[], char b[], char c[], int maior){
+    if(a[0] != b[0]){
+        if(maior == 1){
+            c[0] = b[0];
+        }
+        somasubsoma(a,b,c);
+        return;
+    }
+        for(int i = 17; i > 0; i--){
+            if(b[i] == '0'){
+                b[i] = '1';
+            }
+            else{
+                b[i] = '0';
+            }
+        }
+        printf("b depois da inversão = %s\n", b);
+        char aux[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1','\0'};
+        somasubsoma(b,aux,c);
+        printf("voltei da primeira soma\n");
 
+        for(int i = 18; i > 0; i--){
+            b[i] = c[i];
+        }
+        somasubsoma(a, b, c);
 }
 
-void mult(char a[], char b[], char c[])
-{
-    char resultado[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'}; //Inicializa o resultado como zero
-    for(int i = 17; i >= 1; i--) //Loop para cada bit de 'b'
-    {
-        if(b[i] == '1')
-        {
-            char temp[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0','\0'}; //Cria um valor intermediário deslocado baseado na posição do bit de 'b'
-            for(int j = 17, k = i; j >= 1 && k >= 1; j--, k--) //Copia 'a' deslocado para a direita
-            {
-                temp[k] = a[j];
+void somamult(char a[], char b[], char c[]){
+    int extra = 0;
+    printf("Somando %s e %s\n", a, b);
+    for(int i = 17; i >= 0; i--){ // Considera o bit de sinal
+        if((a[i] == '1' && b[i] == '0' && extra == 0) || (a[i] == '0' && b[i] == '1' && extra == 0)){
+            c[i] = '1';
+        }
+        else if(a[i] == '1' && b[i] == '1' && extra == 0){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 0){
+            c[i] = '0';
+        }
+        else if((a[i] == '1' && b[i] == '0' && extra == 1) || (a[i] == '0' && b[i] == '1' && extra == 1)){
+            c[i] = '0';
+            extra = 1;
+        }
+        else if(a[i] == '1' && b[i] == '1' && extra == 1){
+            c[i] = '1';
+            extra = 1;
+        }
+        else if(a[i] == '0' && b[i] == '0' && extra == 1){
+            c[i] = '1';
+            extra = 0;
+        }
+        printf("c[%d] = %c\n", i, c[i]);
+    }
+    c[18] = '\0'; // Certifique-se de que o último caractere seja o terminador de string
+    printf("Resultado = %s\n", c);
+    return;
+}
+
+void mult(char a[], char b[], char c[]) {
+    // Inicializa o resultado com zeros
+    char resultado[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '\0'};
+    
+    // Determina o sinal do resultado
+    char sinal = '0'; // Inicializa como positivo
+    if (a[0] != b[0]) { // Se os sinais forem diferentes
+        sinal = '1'; // O resultado será negativo
+    }
+
+    for (int i = 17; i >= 1; i--) { // Loop para cada bit de 'b'
+        if (b[i] == '1') {
+            char temp[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '\0'};
+            for (int j = 17, k = i; j >= 1 && k >= 1; j--, k--) {
+                temp[k] = a[j]; // Copia o bit de 'a' para 'temp'
             }
             char aux[19];
-            soma(resultado, temp, aux); //Soma o valor intermediário ao resultado
+            somamult(resultado, temp, aux); // Soma o valor intermediário ao resultado
             strcpy(resultado, aux);
         }
     }
-    strcpy(c, resultado); //Copia o resultado final para 'c'
+
+    // Adiciona o sinal ao resultado
+    resultado[0] = sinal; // Define o sinal no resultado
+    strcpy(c, resultado); // Copia o resultado final para 'c'
 }
+
 
 void dividirBinarios(char* bin1, char* bin2, char* res)
 { 
@@ -256,12 +335,46 @@ void dividirBinarios(char* bin1, char* bin2, char* res)
 }
 
 
-//pra ver se é soma subtração esses caralho mas ta incompleto so funciona de soma
-void operacao(char a[], char b[], char c[], char sinal){
+void exp_binaria(char base[], char exp[], char resultado[]){
+    // Inicializa o resultado como 1 binário (000000000000000001)
+    char temp[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '\0'};
+    strcpy(resultado, temp);
+    
+    // Enquanto o expoente for maior que 0
+    char zero[19] = {'0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '\0'};
+    char exp_copy[19];
+    strcpy(exp_copy, exp);
+    
+    while(strcmp(exp_copy, zero) != 0) {
+        // Se o bit menos significativo do expoente for 1, multiplica o resultado pela base
+        if (exp_copy[17] == '1') {
+            char aux[19];
+            mult(resultado, base, aux);
+            strcpy(resultado, aux);
+        }
+        // Multiplica a base por ela mesma (base = base * base)
+        char base_aux[19];
+        char base_temp[19];
+        strcpy(base_temp, base);
+        mult(base_temp, base_temp, base_aux);
+        strcpy(base, base_aux);
+        
+        // Divide o expoente por 2 (shift à direita)
+        for (int i = 17; i > 0; i--) {
+            exp_copy[i] = exp_copy[i-1];
+        }
+        exp_copy[0] = '0';
+    }
+}
+
+// Função principal que realiza a operação
+void operacao(char a[], char b[], char c[], char sinal, int maior){
     switch(sinal){
         case '+': soma(a, b, c); break;
-        case '-': sub(a, b, c); break;
+        case '-': sub(a, b, c, maior); break;
         case '*': mult(a, b, c); break;
+        case '/': dividirBinarios(a, b, c); break;
+        case '*': exp_b(a, b, c); break;
         default: printf("Sinal inválido\n"); break;
     }
 }
