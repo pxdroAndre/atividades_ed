@@ -392,8 +392,32 @@ void desempilha_e_opera(PilhaString *pilha_num, PilhaChar *pilha_op)
   strcpy(b, popString(pilha_num));
 //   printf("op: %c top: %d\n", op, pilha_op->topo);
   op = popChar(pilha_op);
+    int maior = 0;
+    if(b[0] != a[0]){
+        for(int i = 1; i < 18; i++){
+            if(a[i] > b[i]){
+                maior = 0;
+                c[0] = a[0];
+                operacao(a, b, c, sinal, maior);
+                break;
+            }
+            else if(a[i] < b[i]){
+                maior = 1;
+                c[0] = b[0];
+                operacao(b, a, c, sinal, maior);
+                break;
+            }
+            else if(i == 17 && a[i] == b[i]){
+                printf("Resultado = 000000000000000000\n");
+                return 0;
+            }
+        }
+    }
+    else{
+        c[0] = a[0];
+        operacao(a, b, c, sinal,0);
+    }
 //   printf("op: %c top: %d\n", op, pilha_op->topo);
-  operacao(a,b,c,op);
   pushString(pilha_num, c);
 }
 
