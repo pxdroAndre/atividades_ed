@@ -65,22 +65,7 @@ void remover_zeros_esquerda(char* binario)
     }
 }
 
-void imprimir_ops(PilhaChar pilha_op)
-{
-  for (int i = pilha_op.topo; i>-1; i--)
-  {
-    printf("op[%d]: %c\n", i, pilha_op.characters[i]);
-  }
-} 
 
-
-void imprimir_bins(PilhaString pilha_num)
-{
-  for (int i = pilha_num.topo; i>-1; i--)
-  {
-    printf("bin[%d]: %s\n", i, pilha_num.strings[i]);
-  }
-} 
 
 void inverterString(char* binario)
 {
@@ -162,8 +147,8 @@ void corrigir_decimal(char* binario)
 
     if (comparar_binarios(parteDecimal, "1100011"))
     {
-        strcpy(parteDecimal, sub(parteDecimal, "1100011", c);
-        strcpy(parteInteira, somarBinarios(parteInteira, um));
+        sub(parteDecimal, "1100011", parteDecimal);
+        soma(parteInteira, um, parteInteira);
         strcpy(binario, parteInteira);
         strcat(binario, parteDecimal);
         binario[0] = sinal;
@@ -233,7 +218,7 @@ char* dividirBinarios(char* bin1, char* bin2)
             condicao = 1;
 
             char* subtracao = (char*) calloc(strlen(dividendo) + 1, sizeof(char));
-            strcpy(subtracao, sub(dividendo, bin2, c));
+            sub(dividendo, bin2, subtracao);
             strcpy(dividendo, subtracao);
 
             free(subtracao);
@@ -292,9 +277,9 @@ void desempilha_e_opera(PilhaString *pilha_num, PilhaChar *pilha_op)
 
   strcpy(a, popString(pilha_num));
   strcpy(b, popString(pilha_num));
-  printf("op: %c top: %d\n", op, pilha_op->topo);
+//   printf("op: %c top: %d\n", op, pilha_op->topo);
   op = popChar(pilha_op);
-  printf("op: %c top: %d\n", op, pilha_op->topo);
+//   printf("op: %c top: %d\n", op, pilha_op->topo);
   operacao(a,b,c,op);
   pushString(pilha_num, c);
 }
@@ -321,7 +306,7 @@ void empilhar_num (char *entrada, PilhaString *pilha_num, PilhaChar *pilha_op, i
   if (index_num == 100000100)
   {
     //tratamento de erro
-    printf ("Erro no operador\n");
+    printf ("Operador invalido\n");
     return;
   }
   if ((index_Op!=0) && (((index_num-18) % 19)== 0) || (index_num == 18))
@@ -354,7 +339,7 @@ void empilhar_num (char *entrada, PilhaString *pilha_num, PilhaChar *pilha_op, i
     index_num++;
   }
   binario[18] = '\0';
-  printf("binario: %s\n", binario);
+//   printf("binario: %s\n", binario);
   pushString (pilha_num, binario);
   // printf("index_num: %d \n", index_num);
   empilhar_num(entrada, pilha_num, pilha_op, index_Op+1, index_num, preferencia);
