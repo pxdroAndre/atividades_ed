@@ -51,7 +51,8 @@ void pushChar(PilhaChar *pilha, char value)
         printf("STACK OVERFLOW\n");
     } else 
     {
-        pilha->characters[pilha->topo++] = value;
+        pilha->topo++;
+        pilha->characters[pilha->topo] = value;
     }
 }
 
