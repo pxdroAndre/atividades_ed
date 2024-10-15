@@ -178,7 +178,7 @@ void mult(char a[], char b[], char c[])
     strcpy(c, resultado); //Copia o resultado final para 'c'
 }
 
-char* dividirBinarios(char* bin1, char* bin2)
+void dividirBinarios(char* bin1, char* bin2, char* res)
 { 
     char sinal;
     if (bin1[0] == '1' && bin2[0] == '1')
@@ -218,7 +218,7 @@ char* dividirBinarios(char* bin1, char* bin2)
             condicao = 1;
 
             char* subtracao = (char*) calloc(strlen(dividendo) + 1, sizeof(char));
-            sub(dividendo, bin2, subtracao);
+            strcpy(subtracao, sub(dividendo, bin2));
             strcpy(dividendo, subtracao);
 
             free(subtracao);
@@ -251,8 +251,8 @@ char* dividirBinarios(char* bin1, char* bin2)
     free(dividendo);
     extender_binario(resultado, 18);
     resultado[0] = sinal;
-
-    return resultado;
+    strcpy(res, resultado);
+    free(resultado);
 }
 
 
