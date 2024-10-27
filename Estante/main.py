@@ -39,6 +39,11 @@ def menu(acao):
     match acao:
         case 1:
             print(biblioteca)
+            resposta = int(input("O que deseja? \n[1] Voltar ao menu \n[0] Sair"))
+            if resposta == 0 :
+                return
+            if resposta == 1:
+                hub()
             return
         case 2:
             #funcao de consultar o livro
@@ -52,14 +57,18 @@ def menu(acao):
         case 5:
             #funcao de remover livro
             return
-        case _:
-            print("acao invalida!\n")
+        case 0:
             return
-            
+        case _:
+            print("Acao invalida!\n")
+            return
+def hub():
+    print("Seus livros foram armazenados!\nEscolha uma das opcoes a seguir\n")
+    print("Digite um numero correspondente\n")
+    print("[1] Imprimir a Biblioteca \n[2] Consultar um livro \n[3] Pegar emprestado \n[4] Inserir livro \n[5] Remover livro \n[0] Sair")
+    acao=int(input())
+    menu(acao)
+    
 arquivo_path = 'entrada.txt'
 biblioteca = organizar_biblioteca(arquivo_path)
-print("Seus livros foram armazenados!\nEscolha uma das opcoes a seguir\n")
-print("Digite um numero correspondente\n")
-print("[1] Imprimir a Biblioteca \n[2] Consultar um livro \n[3] Pegar emprestado \n[4] Inserir livro \n[5] Remover livro")
-acao=int(input())
-menu(acao)
+hub()
