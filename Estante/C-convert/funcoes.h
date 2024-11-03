@@ -1,8 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#define MAX_LIVROS 1000
+#define MAX_PRATELEIRAS 6
+#define LARGURA_MAXIMA 96
+#define VOLUME_MAXIMO 96.256
 
-void inicializar_estante(Estante *estante) {
+typedef struct {
+    char titulo[100];
+    char autor[100];
+    int largura;
+    int altura;
+    int profundidade;
+    int volume;
+    int indice;
+} Livro;
+
+typedef struct no{ 
+ Livro livro; 
+ struct no *anterior, *proximo; 
+}No; 
+
+typedef struct { 
+ No *inicio; 
+ No *fim; 
+}ListaDuplamenteEncadeada;
+
+typedef struct {
+    int volume_maximo;
+    int volume_usado;
+    Livro livros[MAX_LIVROS];
+    int num_livros;
+} Prateleira;
+
+typedef struct {
+    Prateleira prateleiras[MAX_PRATELEIRAS];
+    int num_prateleiras;
+} Estante;
+
+typedef struct {
+    Estante estantes[MAX_LIVROS / MAX_PRATELEIRAS];
+    int num_estantes;
+} Biblioteca;
+
+void inicializar_estante(Estante *estante) 
+{
     estante->num_prateleiras = MAX_PRATELEIRAS;
-    for (int i = 0; i < MAX_PRATELEIRAS; i++) {
+    for (int i = 0; i < MAX_PRATELEIRAS; i++) 
+    {
         inicializar_prateleira(&estante->prateleiras[i], LARGURA_MAXIMA);
     }
 }

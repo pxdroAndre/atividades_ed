@@ -40,9 +40,27 @@ typedef struct {
 } Estante;
 
 typedef struct {
-    Estante estantes[MAX_LIVROS / MAX_PRATELEIRAS];
+    Estante *estantes;
     int num_estantes;
 } Biblioteca;
+
+int adicionar_livro(Prateleira *prateleira, Livro livro) 
+{
+    if (prateleira->volume_maximo + livro.volume <= prateleira->volume_maximo) 
+    {
+        prateleira->livros[prateleira->num_livros] = livro;
+        prateleira->volume_usado += livro.volume;
+        prateleira->num_livros++;
+        return 1;
+    }
+    return 0;
+}
+
+void inicializar_prateleira(Prateleira *prateleira, int volume_maximo) {
+    prateleira->volume_maximo = volume_maximo;
+    prateleira->volume_usado = 0;
+    prateleira->num_livros = 0;
+}
 
 void inicializar_estante(Estante *estante) {
     estante->num_prateleiras = MAX_PRATELEIRAS;
@@ -51,10 +69,13 @@ void inicializar_estante(Estante *estante) {
     }
 }
 
-void inicializar_prateleira(Prateleira *prateleira, int volume_maximo) {
-    prateleira->volume_maximo = volume_maximo;
-    prateleira->volume_usado = 0;
-    prateleira->num_livros = 0;
+int adicionar_livro_estante(Estante *estante, Livro livro) {
+    for (int i = 0; i < estante->num_prateleiras; i++) {
+        if (adicionar_livro(&estante->prateleiras[i], livro)) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 int adicionar_livro_biblioteca(Biblioteca *biblioteca, Livro livro) {
@@ -72,7 +93,13 @@ int adicionar_livro_biblioteca(Biblioteca *biblioteca, Livro livro) {
 
 void inicializar_biblioteca(Biblioteca *biblioteca) 
 {
-    biblioteca->num_estantes = 0;
+    biblioteca->num_estantes = 1;  // Inicia com uma estante
+    biblioteca->estantes = malloc((MAX_LIVROS / MAX_PRATELEIRAS) * sizeof(Estante));
+    if (!biblioteca->estantes) {
+        printf("Erro ao alocar memória para estantes\n");
+        exit(1);
+    }
+    inicializar_estante(&biblioteca->estantes[0]);  // Inicializa a primeira estante
 }
 
 
@@ -149,7 +176,8 @@ No* criar_no(Livro livro) {
 }
 
 // Função para transformar a array em uma lista duplamente encadeada circular
-No* array_para_lista(Livro livros[], int num_livros) {
+No* array_para_lista(Livro livros[], int num_livros) 
+{
     if (num_livros == 0) return NULL;
 
     // Cria o primeiro nó e configura como a cabeça
@@ -157,7 +185,8 @@ No* array_para_lista(Livro livros[], int num_livros) {
     No* atual = head;
 
     // Adiciona os demais livros à lista
-    for (int i = 1; i < num_livros; i++) {
+    for (int i = 1; i < num_livros; i++) 
+    {
         No* novo_no = criar_no(livros[i]);
         atual->proximo = novo_no;
         novo_no->anterior = atual;
@@ -202,20 +231,26 @@ int main()
     Livro livros [MAX_LIVROS];
 
     // gurada os livros nnuma array de livros
-    ler_livros_arquivo("entrada_menor.txt", livros);
+    ler_livros_arquivo("entrada2.txt", livros);
 
     //calcula o tamanho da array
     int num_livros = sizeof(livros) / sizeof(livros[0]);    
-
     //ordena por volumes
     ordenar_livros_por_volume(livros, 30);
-
     //inicializa a biblioteca  
     Biblioteca biblioteca;
     inicializar_biblioteca(&biblioteca);
+    
+    No* livrosEncadeados = array_para_lista(livros, 30);
+    printf("%d", livrosEncadeados->anterior->livro.volume);
 
-    array_para_lista(livros, 30);
-    pegar_maior_menor(livros, &biblioteca);
+    
+
+    // atual anterior
+    // atual -> proximo
+    // anterior -> anterior -> anteior
+
+    // pegar_maior_menor(livros, &biblioteca);
 
     return 0;
 }
