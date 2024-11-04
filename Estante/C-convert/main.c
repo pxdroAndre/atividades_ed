@@ -41,7 +41,7 @@ typedef struct {
 
 //struct de estante
 typedef struct {
-    Prateleira prateleiras[MAX_PRATELEIRAS];
+    Prateleira prateleiras[6];
     int num_prateleiras;
 } Estante;
 
@@ -206,8 +206,8 @@ void inicializar_prateleira(Prateleira *prateleira, int volume_maximo)
 
 //função para inicializar estante
 void inicializar_estante(Estante *estante) {
-    estante->num_prateleiras = MAX_PRATELEIRAS; //número de prateleiras da estante recebe o máximo = 6
-    for (int i = 0; i < MAX_PRATELEIRAS; i++) {
+    estante->num_prateleiras = 6; //número de prateleiras da estante recebe o máximo = 6
+    for (int i = 0; i < 6; i++) {
         inicializar_prateleira(&estante->prateleiras[i], VOLUME_MAXIMO); //receber volume máximo de prateleiras em cada estante
     }
 }
@@ -248,7 +248,7 @@ int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
         ((livros->inicio->livro.altura / 2) < prateleira->lista_livros->fim->livro.altura))
     )
     {
-        printf("colocando livros normais\n");
+        //printf("colocando livros normais\n");
         // inserir no fim da lista da prateleira
         Livro backup;
         if ((prateleira->num_livros % 2) == 0) //verificar se numero de livros é par ou impar para criar nó
@@ -496,7 +496,8 @@ void printar_biblioteca(Biblioteca *biblioteca)
     for (int i = 0; i < biblioteca->num_estantes; i++)
     {
         printf("Estante %d\n", i);
-        for (int j = 0; j < biblioteca->estantes[i].num_prateleiras; j++)
+        printf("num prateleiras %d\n", biblioteca->estantes->num_prateleiras);
+        for (int j = 0; j <= biblioteca->estantes->num_prateleiras; j++)
         {
             printf("Prateleira %d\n", j);
             No* atual = biblioteca->estantes[i].prateleiras[j].lista_livros->inicio;
@@ -515,13 +516,13 @@ int main()
     // gurada os livros nnuma array de livros
     ler_livros_arquivo("entrada_menor.txt", livros);
     //ordena por volumes
-    ordenar_livros_por_volume(livros, 30);
+    ordenar_livros_por_volume(livros, 1000);
     //inicializa a biblioteca
     Biblioteca biblioteca;
     inicializar_biblioteca(&biblioteca);
     //fazendo listas de livros
     ListaDuplamenteEncadeada livrosEncadeados;
-    livrosEncadeados.inicio = array_para_lista(livros, 30);
+    livrosEncadeados.inicio = array_para_lista(livros, 1000);
     // o fim da lista recebe o endereço do ultimo item  
     livrosEncadeados.fim = livrosEncadeados.inicio->anterior;
     // faz a lista deixar de ser circular
