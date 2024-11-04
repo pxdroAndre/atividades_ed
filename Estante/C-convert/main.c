@@ -503,7 +503,7 @@ void printar_biblioteca(Biblioteca *biblioteca)
             printf("Prateleira %d\n", j);
             No* atual = biblioteca->estantes[i].prateleiras[j].lista_livros->inicio;
             while (atual != NULL) {
-                printf("Titulo: %s, Volume: %d\n", atual->livro.titulo, atual->livro.volume);
+                //printf("Titulo: %s, Volume: %d\n", atual->livro.titulo, atual->livro.volume);
                 atual = atual->proximo;
             }
         }
