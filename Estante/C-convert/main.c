@@ -373,13 +373,12 @@ int adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada 
             }
             biblioteca->estantes[biblioteca->num_estantes] = nova_estante;
             biblioteca->num_estantes++;
-            printf("dei return 1 porra\n");
             return 1;
         }
     }
-    printf("dei return 0 porra\n");
     return 0;
 }
+
 
 //função para inicializar biblioteca
 void inicializar_biblioteca(Biblioteca *biblioteca)
@@ -390,6 +389,7 @@ void inicializar_biblioteca(Biblioteca *biblioteca)
         printf("Erro ao alocar memória para estantes\n");
         exit(1);
     }
+    inicializar_estante(&biblioteca->estantes[0]); // Inicializa a primeira estante
 }
 
 //função para ler arquivo e inserir os dados do livro
@@ -496,15 +496,15 @@ void printar_biblioteca(Biblioteca *biblioteca)
     for (int i = 0; i < biblioteca->num_estantes; i++)
     {
         printf("Estante %d\n", i);
-        printf("num prateleiras %d\n", biblioteca->estantes->num_prateleiras);
-        for (int j = 0; j <= biblioteca->estantes->num_prateleiras; j++)
+        printf("num prateleiras %d\n", biblioteca->estantes[i].num_prateleiras);
+        for (int j = 0; j < biblioteca->estantes[i].num_prateleiras; j++)
         {
             printf("Prateleira %d\n", j);
             No* atual = biblioteca->estantes[i].prateleiras[j].lista_livros->inicio;
-            do {
+            while (atual != NULL) {
                 printf("Titulo: %s, Volume: %d\n", atual->livro.titulo, atual->livro.volume);
                 atual = atual->proximo;
-            } while (atual != biblioteca->estantes[i].prateleiras[j].lista_livros->inicio);
+            }
         }
     }
 }
