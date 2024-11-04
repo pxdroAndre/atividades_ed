@@ -227,7 +227,6 @@ No* achar_maior_possivel_e_adicionar_prateleira(Prateleira *prateleira, No *livr
 //função para adicionar livro
 int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
 {
-    printf("colocando o livro de volume %d\n", livros->inicio->livro.volume);
     printf("livros na prateleira = %d\n", prateleira->num_livros);
     if (prateleira->num_livros == 0) //caso seja primeiro livro na prateleira
     {
@@ -347,9 +346,11 @@ int adicionar_livro_estante(Estante *estante, ListaDuplamenteEncadeada *livros) 
         printf("adicionando livros na prateleira [%d]\n", i);
         while (adicionar_livro(&estante->prateleiras[i], livros) == 1)
         {
-            printf("livro adicionado de volume %d\n", estante->prateleiras[i].lista_livros->fim->livro.volume);
+            printf("livro adicionado de volume %d na prateleira %d\n", estante->prateleiras[i].lista_livros->fim->livro.volume, i);
             printf("volume usado: %d\n", estante->prateleiras[i].volume_usado);
+            printf("----------------------\n");
         }
+        printf("----------------------\n");
         printf("terminei o for i = %d\n", i);
     } 
     printf("dei return verificar vazia\n");  
@@ -357,7 +358,7 @@ int adicionar_livro_estante(Estante *estante, ListaDuplamenteEncadeada *livros) 
 }
 
 //função para adicionar livro na biblioteca
-int adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada *livros) 
+void adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada *livros) 
 {
     printf("adicionar_livro_biblioteca\n");
     printf("quantidade de estantes: %d\n", biblioteca->num_estantes);
@@ -373,10 +374,10 @@ int adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada 
             }
             biblioteca->estantes[biblioteca->num_estantes] = nova_estante;
             biblioteca->num_estantes++;
-            return 1;
         }
     }
-    return 0;
+    printf("titulo %s\n", biblioteca->estantes[1].prateleiras[1].lista_livros->inicio->livro.titulo);
+    return;
 }
 
 
