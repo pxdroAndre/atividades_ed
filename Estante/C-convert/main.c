@@ -258,6 +258,10 @@ int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
         }
         else
         {
+            if(prateleira->volume_usado + livros->fim->livro.volume > prateleira->volume_maximo) //verificar se cabe o livro
+            {
+                return 0;
+            }
             printf("livros impar\n");
             backup = RemoveFim(livros);
         }
@@ -339,13 +343,17 @@ int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
 int adicionar_livro_estante(Estante *estante, ListaDuplamenteEncadeada *livros) {
     for (int i = 0; i < estante->num_prateleiras; i++) 
     {
+        printf("comecei o for i = %d\n", i);
         printf("adicionando livros na prateleira [%d]\n", i);
-        for (int j = 0; (adicionar_livro(&estante->prateleiras[i], livros) == 1); j++)
+        while (adicionar_livro(&estante->prateleiras[i], livros) == 1)
         {
-            printf("livro adicionado\n");
+            printf("livro adicionado de volume %d\n", estante->prateleiras[i].lista_livros->fim->livro.volume);
+            printf("volume usado: %d\n", estante->prateleiras[i].volume_usado);
         }
-    }   
-    return 0;
+        printf("terminei o for i = %d\n", i);
+    } 
+    printf("dei return verificar vazia\n");  
+    return verificar_vazia(livros) ? 1 : 0; // Retorna 1 se todos os livros foram adicionados, caso contrário 0
 }
 
 //função para adicionar livro na biblioteca
@@ -358,6 +366,11 @@ int adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada 
         Estante nova_estante;
         inicializar_estante(&nova_estante); //chamar iniciar estante
         if (adicionar_livro_estante(&nova_estante, livros)) { //chamar para adicionar o livro na estante
+            biblioteca->estantes = realloc(biblioteca->estantes, (biblioteca->num_estantes + 1) * sizeof(Estante));
+            if (!biblioteca->estantes) {
+                printf("Erro ao realocar memória para estantes\n");
+                exit(1);
+            }
             biblioteca->estantes[biblioteca->num_estantes] = nova_estante;
             biblioteca->num_estantes++;
             printf("dei return 1 porra\n");
