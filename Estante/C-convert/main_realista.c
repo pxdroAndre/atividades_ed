@@ -34,6 +34,8 @@ typedef struct {
 typedef struct {
     int largura_usada;
     int largura_maxima;
+    int volume_maximo;
+    int volume_usado;
     int num_livros;
     ListaDuplamenteEncadeada *lista_livros;
 } Prateleira;
@@ -62,6 +64,8 @@ ListaDuplamenteEncadeada *inicializaLista() {
 Prateleira inicializaPrateleira() {
     Prateleira prateleira;
     prateleira.largura_maxima = LARGURA_MAXIMA;
+    prateleira.volume_maximo = VOLUME_MAXIMO;
+    prateleira.volume_usado = 0;
     prateleira.largura_usada = 0;
     prateleira.num_livros = 0;
     prateleira.lista_livros = inicializaLista();
@@ -123,9 +127,10 @@ void adicionaLivro(Biblioteca *biblioteca, Livro livro) {
             Prateleira *prateleira = &estante->prateleiras[j];
             
             // Verificar se a prateleira tem espaço suficiente
-            printf("largura maxima: %d largura usada: %d\n", prateleira->largura_maxima, prateleira->largura_usada);
-            if (prateleira->largura_usada + livro.largura <= prateleira->largura_maxima) {
+            if ((prateleira->volume_usado + livro.volume <= prateleira->volume_maximo) && 
+            (prateleira->largura_usada + livro.largura <= prateleira->largura_maxima)) {
                 adicionaLivroNaLista(prateleira->lista_livros, livro);
+                prateleira->volume_usado += livro.volume;
                 prateleira->largura_usada += livro.largura;
                 prateleira->num_livros++;
                 return; // Livro adicionado com sucesso
@@ -165,14 +170,15 @@ void imprimeBiblioteca(Biblioteca *biblioteca) {
         Estante *estante = &biblioteca->estantes[i];
         for (int j = 0; j < estante->num_prateleiras; j++) {
             Prateleira *prateleira = &estante->prateleiras[j];
-            printf("    Prateleira %d: (Largura usada = %d gm/cm3)\n", j + 1, prateleira->largura_usada);
-            printf("      Livros:\n");
+            printf("    Prateleira %d: (Peso = %d gm/cm3)\n", j + 1, prateleira->volume_usado);
+            printf("      Livros[%d]:\n", prateleira->num_livros);
 
             // Percorre a lista de livros na prateleira
             No *atual = prateleira->lista_livros->inicio;
             while (atual != NULL) {
                 Livro livro = atual->livro;
-                printf("        - Indice: %d, Titulo: %s, Autor: %s, Volume: %d\n", livro.indice, livro.titulo, livro.autor, livro.volume);
+                printf("        - Indice: %d, Titulo: %s, Autor: %s, Altura: %d, Largura: %d, profundidade: %d Volume: %d\n", 
+                livro.indice, livro.titulo, livro.autor,livro.altura, livro.largura, livro.profundidade, livro.volume);
                 atual = atual->proximo;
             }
             
@@ -219,13 +225,13 @@ void ler_livros_arquivo(const char *arquivo_path, Livro livros[])
 }
 
 //função para ordernar livros de acordo com volume do menor para maior
-void ordenar_livros_por_largura(Livro livros[], int num_livros)
+void ordenar_livros_por_volume(Livro livros[], int num_livros)
 {
     for (int i = 0; i < num_livros - 1; i++)
     {
         for (int j = 0; j < num_livros - i - 1; j++)
         {
-            if (livros[j].largura > livros[j + 1].largura)
+            if (livros[j].volume > livros[j + 1].volume)
             {
                 // Trocar os livros de posição
                 Livro temp = livros[j];
@@ -353,23 +359,24 @@ Livro ler_livro(Livro livro, Biblioteca *biblioteca)
     return livro;
 } 
 
-Biblioteca *inserir_livro (Biblioteca *biblioteca, Livro livros[], int *contador)
+Biblioteca inserir_livro (Biblioteca *biblioteca, Livro livros[], int *contador)
 {
     Livro livro_inserido;
+    Biblioteca nova_biblioteca;
     livro_inserido = ler_livro(livro_inserido, biblioteca);
     livro_inserido.indice = MAX_LIVROS + *contador;
     printf("indice: %d\n", livro_inserido.indice);
     livros[MAX_LIVROS + (*contador-1)] = livro_inserido;
-    ordenar_livros_por_largura(livros, MAX_LIVROS+*contador);
+    ordenar_livros_por_volume(livros, MAX_LIVROS+*contador);
     // Adicionar livros à biblioteca
     for (int i = 0, j = MAX_LIVROS; i < MAX_LIVROS; i++)
     {
-        adicionaLivro(biblioteca, livros[i]);    
+        adicionaLivro(&nova_biblioteca, livros[i]);    
         if ((i >= j)) break;
-        adicionaLivro(biblioteca, livros[j]);
+        adicionaLivro(&nova_biblioteca, livros[j]);
         j--;
     }
-    return biblioteca;
+    return nova_biblioteca;
 
 }
 
@@ -465,7 +472,7 @@ void hub (Biblioteca *biblioteca, Livro livros[], int *contador_inserir)
             {
                 novos_livros[i] = livros[i];
             }
-            biblioteca = inserir_livro(biblioteca, novos_livros, contador_inserir);
+            *biblioteca = inserir_livro(biblioteca, novos_livros, contador_inserir);
             printf("[0] Fechar programa\n[1] Voltar ao menu\n");
             scanf("%d", &resposta);
             if (resposta == 0) return;
@@ -501,7 +508,7 @@ int main() {
 
     // Criar alguns livros de exemplo 
     ler_livros_arquivo("entrada.txt", livros);
-    ordenar_livros_por_largura(livros, MAX_LIVROS);
+    ordenar_livros_por_volume(livros, MAX_LIVROS);
 
     // Adicionar livros à biblioteca
     for (int i = 0, j = MAX_LIVROS; i < MAX_LIVROS; i++)
