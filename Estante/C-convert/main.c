@@ -58,8 +58,9 @@ int verificar_vazia(ListaDuplamenteEncadeada *lista)
 }
 
 // Função para criar um novo nó e inserir no inicio da lista
-void criar_no_e_insere_inicio(Livro livro, ListaDuplamenteEncadeada *prateleira) {
-    printf("2222\n");
+void criar_no_e_insere_inicio(Livro livro, ListaDuplamenteEncadeada *prateleira) 
+{
+    printf("criando o no e colocando no inicio da prateleira\n");
     No* novo_no = (No*)malloc(sizeof(No));
     if (!novo_no) {
         printf("Erro ao alocar memória\n");
@@ -72,24 +73,26 @@ void criar_no_e_insere_inicio(Livro livro, ListaDuplamenteEncadeada *prateleira)
     //P3  
     novo_no->anterior = NULL;
     //se a lista nao tiver vazia
-    if((verificar_vazia(prateleira)) == 0) 
+    if((verificar_vazia(prateleira)) == 1) 
     {
         //P4
-        prateleira->inicio->anterior = novo_no;
+        printf("vaziaz\n");
+        prateleira->inicio= prateleira->fim = novo_no;
     }
     else
     {
-        prateleira->fim = novo_no;
+        //p5  
+        prateleira->inicio = novo_no;
     }
-    //p5  
-    prateleira->inicio = novo_no;
     
+    printf("inserido noinicio da lista\n");
     return;
 }
 
 // Função para criar um novo nó e inserir no fim da lista
-void criar_no_e_insere_fim(Livro livro, ListaDuplamenteEncadeada *lista) {
-    printf("5555\n");
+void criar_no_e_insere_fim(Livro livro, ListaDuplamenteEncadeada *lista) 
+{
+    printf("inserindo no fim da prateleira\n");
     No* novo_no = (No*)malloc(sizeof(No));
     if (!novo_no) {
         printf("Erro ao alocar memória\n");
@@ -105,19 +108,22 @@ void criar_no_e_insere_fim(Livro livro, ListaDuplamenteEncadeada *lista) {
     novo_no->anterior = lista->fim;
     //p5  
     lista->fim = novo_no;
+    printf("inserido no fim da prateleira\n");
     return;
 }
 
 //remover inicio da lista sem backup
-int RemoveInicio(ListaDuplamenteEncadeada *lista)
+Livro RemoveInicio(ListaDuplamenteEncadeada *lista)
 { 
+    printf("removendo o topo da lista\n");
+    printf("voli:%d volf: %d\n", lista->inicio->livro.volume, lista->fim->livro.volume);
     No *atual;  
-    if (verificar_vazia(lista) == 1) return 0; 
+    Livro backup = { .titulo = "", .volume = -1 };
+    if (verificar_vazia(lista) == 1) return backup; 
     // backup do elemento do inicio da lista pra dar free
     atual = lista->inicio; 
-    // backup do valor do elemento do inicio dalista q sera removido
- 
-
+    printf("vol2:%d \n", lista->inicio->proximo->livro.volume);
+    backup = atual->livro;
     if (lista->inicio == lista->fim) // se só tiver um elemento na lista
         lista->inicio = lista->fim = NULL; 
     else
@@ -126,41 +132,42 @@ int RemoveInicio(ListaDuplamenteEncadeada *lista)
         lista->inicio = atual->proximo; 
         // setando o item 2 como inicio da lista   
         lista->inicio->anterior = NULL;  
+        printf("voli:%d volf: %d\n", lista->inicio->livro.volume, lista->fim->livro.volume);
+
     }  
     // libera a memoria do nó removido  
     free(atual); 
-    return 1; 
+    return backup; 
 } 
 
-int RemoveFim(ListaDuplamenteEncadeada *lista){ 
+Livro RemoveFim(ListaDuplamenteEncadeada *lista){ 
     No *atual;  
-    
+    Livro backup;
     // pega o livro que sera removido
     atual = lista->fim; 
+    backup = atual->livro;
     // ve se é o unico item da lista
     if (lista->inicio == lista->fim)  
         lista->inicio = lista->fim = NULL; 
     else
     {  
-        // fazendo o penultimo apontar pro inicio se tornando o ultimo
-        atual->anterior->proximo = atual->anterior;
-        // atualiza o inicio-proximo pra apontar pro fim da lista
-        atual->anterior->proximo = atual->proximo;
-        // fim da lista aponta pro penultimo 
-        lista->fim = atual->anterior; 
+        // Atualiza o ponteiro fim para o penúltimo nó
+        lista->fim = atual->anterior;
+        lista->fim->proximo = NULL; // O novo fim da lista deve apontar para NULL
     }       
-    free(atual); 
-    
-    return 1; 
+    printf("esse free?\n");
+    // free(atual); 
+    return backup; 
 } 
 
- 
-int RemoveMeio(No *livro_inicio, int indice)
+Livro RemoveMeio(No *livro_inicio, No *livro_achado)
 {
-    if (livro_inicio->livro.indice == indice)
+    Livro backup;
+    if (livro_inicio == livro_achado)
     {
-        No *atual;  
+        No *atual; 
         atual = livro_inicio;
+        backup = atual->livro;
         // faz o 14-anterior apontar pro 12 metaforicamente
         livro_inicio->proximo->anterior = livro_inicio->anterior;
         // faz o 12-proximo apontar pro 14 metaforicament
@@ -170,15 +177,15 @@ int RemoveMeio(No *livro_inicio, int indice)
     else
     {
         // recursa ate achar o no q foi adicionado
-        return RemoveMeio(livro_inicio->proximo, indice);
+        return RemoveMeio(livro_inicio->proximo, livro_achado);
     }
-    return 1; 
+    return backup; 
 } 
 
 //função para inicializar lista
 void inicializar_lista (ListaDuplamenteEncadeada *lista_livros)
 {
-    printf("HHHH\n");
+    // printf("inicializar_lista\n");
     //inicializar lista de livros com null
     lista_livros->inicio = NULL;
     lista_livros->fim = NULL;
@@ -187,7 +194,7 @@ void inicializar_lista (ListaDuplamenteEncadeada *lista_livros)
 //função para inicializar pratileira
 void inicializar_prateleira(Prateleira *prateleira, int volume_maximo)
 {
-    printf("GGGG\n");
+    // printf("inicializar_prateleira\n");
 
     prateleira->volume_maximo = volume_maximo; //volume máximo da pratileira irá receber 96256
     prateleira->volume_usado = 0; //volume usado começa com 0
@@ -202,74 +209,49 @@ void inicializar_prateleira(Prateleira *prateleira, int volume_maximo)
 
 //função para inicializar estante
 void inicializar_estante(Estante *estante) {
-    printf("DDDD\n");
+    // printf("inicializar_estante\n");
     estante->num_prateleiras = MAX_PRATELEIRAS; //número de prateleiras da estante recebe o máximo = 6
     for (int i = 0; i < MAX_PRATELEIRAS; i++) {
-        printf("era pra ter farios g\n");
+        // printf("criando prateleira[%d]\n", i);
         inicializar_prateleira(&estante->prateleiras[i], VOLUME_MAXIMO); //receber volume máximo de prateleiras em cada estante
     }
 }
 
-//função para retirar livro par
-void retirar_livro_par(ListaDuplamenteEncadeada *livros)
-{
-    printf("33333\n");
-    // utili pra liberar memoria do ponteiro
-    No *temp = livros->inicio;
-    //Faz o 6-proximo apontar pro 2 metaforicamente
-    livros->fim->proximo = livros->inicio->proximo;
-    // Faz o 2-anterior apontar pro 6 metaforicamente
-    livros->inicio->proximo->anterior = livros->inicio->anterior;
-    // Faz o inicio apontar pro 6 metaforicamente
-    livros->inicio = livros->fim;
-    // Faz o fim apontar pro 2 metaforicamente
-    livros->fim = livros->inicio->proximo;
-    free (temp);
-}
-
-//função para retirar livro impar
-void retirar_livro_impar(ListaDuplamenteEncadeada *livros)
-{
-    printf("66666\n");
-    //Faz o 2-anterior apontar pro 5 metaforicamente
-    livros->fim->anterior = livros->inicio->anterior;
-    // Faz o 5-proximo apontar pro 2 metaforicamente
-    livros->inicio->anterior->proximo = livros->inicio->proximo;
-    // Faz o inicio apontar pro 2 metaforicamente
-    livros->inicio = livros->fim;
-    // Faz o fim apontar pro 5 metaforicamente
-    livros->fim = livros->inicio->anterior;
-}
 
 //função para criar lista
-int achar_maior_possivel_e_adicionar_prateleira(Prateleira *prateleira, No *livros, int volume_restante)
+No* achar_maior_possivel_e_adicionar_prateleira(Prateleira *prateleira, No *livros, int volume_restante)
 {
     printf("99999\n");
 
     // se couber na estante ele adiciona
     if (volume_restante <= livros->livro.volume)
     {
-        criar_no_e_insere_fim(livros->livro, prateleira->lista_livros);
-        prateleira->volume_usado += livros->livro.volume;
-        prateleira->num_livros++;
-        return livros->livro.indice;
+        return livros;
     }
-    return achar_maior_possivel_e_adicionar_prateleira (prateleira, livros->anterior, volume_restante);
+    return achar_maior_possivel_e_adicionar_prateleira(prateleira, livros->anterior, volume_restante);
 }
 
 //função para adicionar livro
 int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
 {
-    printf("EEEEE\n");
-    printf("%d\n", prateleira->num_livros);
+    printf("adicionando livro\n");
+    printf("livros da prateleira = %d\n", prateleira->num_livros);
+    // printf("voli: volf: \n");
     if(prateleira->num_livros == 0) //caso seja primeiro livro na prateleira
     {
-        printf("111\n");
-        criar_no_e_insere_inicio(livros->inicio->livro, prateleira->lista_livros);
+        printf("colocando primeiro livro\n");
+        // printf("voli:%d volf: %d\n", livros->inicio->livro.volume, livros->fim->livro.volume);
+        Livro backup = RemoveInicio(livros); // remove livro da lista de livros
+        criar_no_e_insere_inicio(backup, prateleira->lista_livros);
+        // printf("voli:%d volf: %d\n", livros->inicio->livro.volume, livros->fim->livro.volume);
         prateleira->volume_usado += prateleira->lista_livros->inicio->livro.volume; //volume usado é acrescentado com volume de livro
         prateleira->num_livros++; //numero de livros da prateleira é aumentado
         // printf("livro: %d, vol: %d", prateleira->num_livros,prateleira->volume_usado);
-        retirar_livro_par(livros); // remove livro da lista de livros
+        // printf("voli:%d volf: %d\n", livros->inicio->livro.volume, livros->fim->livro.volume);
+        // printf("livro colocado: autor: %s e vol: %d / volume da prateleira: %d / num_livros: %d / inicio dos livros: autor: %s e vol: %d\n",
+        // prateleira->lista_livros->fim->livro.autor, prateleira->lista_livros->fim->livro.volume, prateleira->volume_usado, prateleira->num_livros,
+        // livros->inicio->livro.autor, livros->inicio->livro.volume);
+        printf("primeiro livro colocado\n");
         return 1;
     }
     //se caso volume usado seja menor que volume máximo, inserir livro
@@ -281,19 +263,25 @@ int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
         ((livros->inicio->livro.altura/2) < prateleira->lista_livros->fim->livro.altura)) 
         )
     {
-        printf("44444\n");
+        printf("adicionando livros normais\n");
         // inserir no fim da lista da prateleira
-        criar_no_e_insere_fim(livros->inicio->livro, prateleira->lista_livros);
-        prateleira->volume_usado += livros->inicio->livro.volume;
         if ((prateleira->num_livros % 2) == 0) //verificar se numero de livros é par ou impar para criar nó
         {
-            retirar_livro_par(livros);
+            printf("livros par\n");
+            Livro backup = RemoveInicio(livros); // remove livro da lista de livros
+            criar_no_e_insere_fim(backup, prateleira->lista_livros);
+            prateleira->volume_usado += backup.volume;
         }
         else
         {
-            retirar_livro_impar(livros);
+            printf("livros impar\n");
+            printf("vol: %d\n", livros->fim->livro.volume);
+            Livro backup = RemoveFim(livros);
+            criar_no_e_insere_fim(backup, prateleira->lista_livros);
+            prateleira->volume_usado += backup.volume;
         }
         prateleira->num_livros++; //aumentar numero de lirvos na prateleria
+        printf("retornarei\n");
         return 1;
     }
     else 
@@ -310,48 +298,75 @@ int adicionar_livro(Prateleira *prateleira, ListaDuplamenteEncadeada *livros)
             {
                 printf("8888\n");
                 //encontrar livro de maior volume possível para inserir na prateleira e retorna o indice do livor
-                int indice_usado = achar_maior_possivel_e_adicionar_prateleira(prateleira, livros->fim, volume_restante); 
-                if (indice_usado == livros->inicio->livro.indice) RemoveInicio(livros);
-                else if (indice_usado == livros->fim->livro.indice) RemoveFim(livros);
-                else RemoveMeio(livros->inicio, indice_usado);
+                No* livro_achado = achar_maior_possivel_e_adicionar_prateleira(prateleira, livros->fim, volume_restante); 
+                if (livro_achado == livros->inicio) 
+                {
+                    Livro backup = RemoveInicio(livros);
+                    criar_no_e_insere_fim(backup, prateleira->lista_livros);
+                }
+                else if (livro_achado == livros->fim)
+                {
+                    Livro backup = RemoveFim(livros);
+                    criar_no_e_insere_fim(backup, prateleira->lista_livros);
+                }
+                else RemoveMeio(livros->inicio, livro_achado);
             }
+            return 1;
         }
         else
         {
             // se o numero de livros for impar a lista esta no livro maior
             // verifica o volume do livro menor da lista 
+                printf("888888\n");
+
             if (volume_restante >= livros->inicio->proximo->livro.volume)
             {
-                printf("888888\n");
                 //encontrar livro de maior volume possível para inserir na prateleira e retorna o indice do livor
-                int indice_usado = achar_maior_possivel_e_adicionar_prateleira(prateleira, livros->inicio, volume_restante); 
-                if (indice_usado == livros->fim->livro.indice) RemoveFim(livros);
-                else RemoveMeio(livros->inicio, indice_usado);
+                No* livro_achado = achar_maior_possivel_e_adicionar_prateleira(prateleira, livros->inicio, volume_restante); 
+                if (livro_achado == livros->inicio) 
+                {
+                    Livro backup = RemoveInicio(livros);
+                    criar_no_e_insere_fim(backup, prateleira->lista_livros);
+                }
+                else if (livro_achado == livros->fim)
+                {
+                    Livro backup = RemoveFim(livros);
+                    criar_no_e_insere_fim(backup, prateleira->lista_livros);
+                }
+                else 
+                {
+                    Livro backup = RemoveMeio(livros->inicio, livro_achado);
+                    criar_no_e_insere_fim(backup, prateleira->lista_livros);
+                }
             }
+            return 1;
         }
     }
+    printf("a\n");
     return 0;
 }
 
 //função para adicionar livro na estante
 int adicionar_livro_estante(Estante *estante, ListaDuplamenteEncadeada *livros) {
-    printf("FFF\n");
-    for (int i = 0; i < estante->num_prateleiras; i++) {
-        if (adicionar_livro(&estante->prateleiras[i], livros)) 
+    printf("adicionar_livro_estante\n");
+    for (int i = 0; i < estante->num_prateleiras; i++) 
+    {
+        printf("adicionando livros na prateleira [%d]\n", i);
+        for (int j = 0; (adicionar_livro(&estante->prateleiras[i], livros) == 1); j++)
         {
-            return 1;
+            printf("livro adicionado\n");
         }
-    }
+    }   
     return 0;
 }
 
 //função para adicionar livro na biblioteca
 int adicionar_livro_biblioteca(Biblioteca *biblioteca, ListaDuplamenteEncadeada *livros) 
 {
-    printf("bbb\n");
-    printf("b: %d\n", biblioteca->num_estantes);
+    printf("adicionar_livro_biblioteca\n");
+    printf("num_estantes: %d\n", biblioteca->num_estantes);
     if (biblioteca->num_estantes == 1 || !adicionar_livro_estante(&biblioteca->estantes[biblioteca->num_estantes - 1], livros)) {
-        printf("CCC\n");
+        printf("criando nova estante\n");
         Estante nova_estante;
         inicializar_estante(&nova_estante); //chamar iniciar estante
         if (adicionar_livro_estante(&nova_estante, livros)) { //chamar para adicionar o livro na estante
@@ -448,18 +463,26 @@ No* array_para_lista(Livro livros[], int num_livros)
     for (int i = 1; i < num_livros; i++)
     {
         No* novo_no = criar_no(livros[i]);
+        // poe o novo no como depois do no atual
         atual->proximo = novo_no;
+        // liga o nó atual ao novo
         novo_no->anterior = atual;
+        printf("livro[%d] aponta para %d\n", i, novo_no->anterior->livro.volume);
+        // atual receba o novo nó
         atual = novo_no;
+        free (novo_no);
     }
-    // Torna a listacircular
-    atual->proximo = head;
+    // faz o atual ser o fim da lista
+    atual->proximo = NULL;
+    // o inicio da lista-anterior aponte pro ultimo item 
     head->anterior = atual;
+    // printf("%d\n", atual->livro.volume);
     return head;
 }
 
 // Função para imprimir a lista circular
-void imprimir_lista(No* head) {
+void imprimir_lista(No* head) 
+{
     if (!head) return;
     No* atual = head;
     do {
@@ -493,8 +516,12 @@ int main()
     //fazendo listas de livros
     ListaDuplamenteEncadeada livrosEncadeados;
     livrosEncadeados.inicio = array_para_lista(livros, 30);
+    printf("%d, %d\n", livros[1].volume, livrosEncadeados.inicio->proximo->livro.volume);
+    // o fim da lista recebe o endereço do ultimo item  
     livrosEncadeados.fim = livrosEncadeados.inicio->anterior;
-    // printf("%d, %d\n", livrosEncadeados.inicio->livro.volume, livrosEncadeados.fim->livro.volume);
+    // faz a lista deixar de ser circular
+    livrosEncadeados.inicio->anterior = NULL;
+    printf("%d, %d\n", livrosEncadeados.inicio->livro.volume, livrosEncadeados.inicio->proximo->livro.volume);
     adicionar_livro_biblioteca(&biblioteca, &livrosEncadeados);
     // printf("nome:%s, vol:%d\n", biblioteca.estantes->prateleiras->lista_livros->inicio->livro.autor, biblioteca.estantes->prateleiras->lista_livros->inicio->livro.volume);
     return 0;
