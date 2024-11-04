@@ -165,13 +165,13 @@ void imprimeBiblioteca(Biblioteca *biblioteca) {
         for (int j = 0; j < estante->num_prateleiras; j++) {
             Prateleira *prateleira = &estante->prateleiras[j];
             printf("    Prateleira %d: (Peso = %d gm/cm3)\n", j + 1, prateleira->volume_usado);
-            printf("      Livros:\n");
+            printf("      Livros[%d]:\n", prateleira->num_livros);
 
             // Percorre a lista de livros na prateleira
             No *atual = prateleira->lista_livros->inicio;
             while (atual != NULL) {
                 Livro livro = atual->livro;
-                printf("        - Indice: %d, Titulo: %s, Autor: %s, Volume: %d\n", livro.indice, livro.titulo, livro.autor, livro.volume);
+                // printf("        - Indice: %d, Titulo: %s, Autor: %s, Volume: %d\n", livro.indice, livro.titulo, livro.autor, livro.volume);
                 atual = atual->proximo;
             }
             
