@@ -1,0 +1,5 @@
+titulo: Perfil diagnóstico do nível cibercultural de estudantes de graduação para aplicação da metodologia Sala de Aula Invertida | Autor: Ana C. V. Simões, Fernanda R. Tavares, Henrique N. Schneider
+titulo: Cidades Inteligentes: Entendendo um semáforo inteligente com simulações usando robótica educacional | Autor: Alessandro M. Cambruzzi, Artur C. Scolari, Wellton C. de Oliveira
+titulo: Tutor Inteligente em Jogo Educacional Digital para Capacitação na Identificação de Fake News em Português: Experimentos Preliminares | Autor: Treice O. Moreira, Cláudia S. da Silva, Cláudio Passos, Isabel Fernandes, Ronaldo R. Goldschmidt
+titulo: Proposta de Jogo Serio para o Ensino de Uroginecologia | Autor: Bryan T. Paiva, Érico Marcelo H. do Amaral, Guilherme D. Goulart, Marco Antônio A. dos Santos, Maria Elizabeth B. Silva
+titulo: Desenvolvimento de um website educacional acessível com o Wordpress: um estudo de caso | Autor: Felipe S. Minholi, Luis R. M. Rocha

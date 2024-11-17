@@ -1,0 +1,46 @@
+titulo: Recomendação Pedagógica Personalizada a partir do Sequenciamento de Ações Baseadas na Taxonomia de Bloom e no Perfil RASI usando Planejamento em Inteligência Artificial | Autor: Newarney Torrezão da Costa, Márcia Aparecida Fernandes
+titulo: Uma Abordagem para o Ensino de Testes de Software utilizando Metodologias Ativas em Cursos Superiores de Computação | Autor: Isaac Souza Elgrably, Sandro Ronaldo Bezerra Oliveira
+titulo: Um Modelo baseado em Trilhas de Aprendizagem para a Representação de Alunos de Ambientes Virtuais de Aprendizagem | Autor: David Brito Ramos, Elaine Harada Teixeira de Oliveira
+titulo: Disengaging the engaged ones: gender-stereotyped tutoring systems are undermining self-efficacy and flow state of girls | Autor: Francys Rafael do Nascimento Martins, Ig Ibert Bittencourt Santana Pinto, Geiser Chalco Challco, Seiji Isotani, Breno Felix de Sousa, Jessica Fernanda Silva Barbosa, Marcelo Reis
+titulo: Assistente virtual ADA Blocks: Facilitando a escolha de ferramentas de programação em blocos para a Educação 4.0 | Autor: Ana Paula J. Perin, Deivid E. dos S. Silva, Natasha M. C. Valentim
+titulo: Even Boosting Stereotypes Increase The Gender Gap in Gamified Tutoring Systems: An Analysis of Self Self-efficacy, Flow and Learning | Autor: Maria Takeshita, Geiser Challco, Marcelo Reis, Jário Santos, Seiji Isotani, Ig Bittencourt
+titulo: A possibilidade de dialogar durante o desenvolvimento de projetos envolvendo a programação com o Scratch nas aulas de matemática | Autor: Agner L. Bittencourt, Leandra A. Fioreze
+titulo: Do gamified tutoring systems hinder sexual diversity? An experimental study with cis-heteronormative stereotype | Autor: Breno Felix de Sousa, Geiser Chalco Challco, Marcelo Reis, Ig Ibert Bittencourt Santana, Jessica Fernanda Silva Barbosa, Francys Rafael do Nascimento Martins, Seiji Isotani
+titulo: GraduAI – Sistema com Aprendizagem de Máquina para Avaliação de Risco de Evasão | Autor: Leonardo de Almeida Teodoro, Arthur Pedrosa Ferreira, Marco André Abud Kappel
+titulo: Pensamento Computacional e Scratch: Um Relato de Experiências com Estudantes do Ensino Médio Público no Distrito Federal | Autor: Vinícius Aguiar Monteiro, Maristela Holanda
+titulo: UnplugGamify: Material Didático para Apoiar a Gamificação Desplugada Centrada no Estudante | Autor: Isabelle Melo do Nascimento, Wilk Oliveira, Pasqueline Dantas
+titulo: Pensar e Vestir: Jogo Digital Educacional para o Desenvolvimento do Pensamento Computacional | Autor: Matheus Soppa Geremias, Taynara Cerigueli Dutra, Eleandro Maschio, Isabela Gasparini
+titulo: Jornada Biomas Escolas: um jogo digital em prol da conservação da biodiversidade | Autor: Silvia de Oliveira Kist, Camilo de Vasconcellos Rebouças, Patricia Behling Schäffer, Gabriela Caroline de Lemos, Juçara Bordin
+titulo: Game Comenius 3 | Autor: Denise Figueredo, Dulce Márcia Cruz, Fábio Medeiros
+titulo: Furbot: um jogo para auxiliar no desenvolvimento de habilidades do Pensamento Computacional | Autor: Luciana P. de Araújo Kohler, Maurício Capobianco Lopes, Dalton Solano dos Reis, Miguel Alexandre Wisintainer, Felipe Augusto de Carvalho Araújo, Jorge Kohn, Lucas Hong Lae Son, Bruno F. F. Santos
+titulo: RevisãoOnline: Plataforma online de escrita e revisão de textos dissertativo-argumentativos | Autor: Bianca Erthal de Mesquita, Eduardo de Souza Ilha, Gabriel Zanella Bardini, Eliseo Reategui, Marcio Bigolin
+titulo: BackTest: o software de feedback da avaliação qualitativa que promove aprendizagem personalizada | Autor: Carla Cunto, João Pedro Moreira Ferreira, Lucas Duarte
+titulo: Laboratório Remoto de Programação Básica de Sistemas Digitais | Autor: Shin-Ting Wu, Bruno Santos Battisttela, João Paulo Gomes, Nelson Vitor Augusto
+titulo: Plataforma Educacional Bootebook | Autor: Edileno de Almeida Santos
+titulo: Cadê Minha Pizza? Exercitando Matemática e Pensamento Computacional de forma lúdica por meio de grafos | Autor: Fabrizio Honda, Fernanda Pires, Marcela Pessoa, Elaine H. T. Oliveira
+titulo: Palavras Mágicas: um jogo de plataforma para exercitar a Língua Portuguesa | Autor: Alessandra Corrêa, Handryo Costa, Jeniffer Macena, João Bernado, Rafaela Melo, Marcela Pessoa, Fernanda Pessoa
+titulo: ADA Blocks: assistente virtual para apoiar professores na escolha de ferramentas de programação em blocos | Autor: Ana Paula Juliana Perin, Deivid E. dos S. Silva, Natasha M. C. Valentim
+titulo: Rabbit Code: Um jogo voltado para a aprendizagem de matrizes | Autor: Izaque Rolim, Flávia Brenda, João Queroga, Rafaela Melo, José Carlos Duarte, Marcela Pessoa, Fernanda Pires
+titulo: MyName: um jogo educacional inspirado no problema da mochila | Autor: Lucas Teixeira Nascimento, Cristiana do Nascimento Pedrosa, Fabrizio Honda, Fernanda Pires, Marcela Pessoa
+titulo: aquare!a: um repositório dinâmico para elaboração e compartilhamento de Recursos Educacionais Abertos | Autor: Fernando Cesar Balbino, Ellen Francine Barbosa
+titulo: Observatório Social: Plataforma Online para Publicação e Acesso de Artigos de Pesquisa | Autor: Vitor Daniel Silva Melo, Danilo Pereira Escudero, Miguel Bonumá Brunet
+titulo: Avalanche Silábica: jogo educacional para aprendizagem de encontros vocálicos na Língua Portuguesa | Autor: Cleidiana Alves, Jeniffer Macena, Fernanda Pires, Marcela Pessoa
+titulo: The Island: Calculated Defense - Praticando Operações de Adição e Subtração | Autor: Marcelo Brilhante, Cássia Venâncio, Jeniffer Macena, Fabrizio Honda, José Carlos Duarte, Marcela Pessoa, Fernanda Pires
+titulo: Yerê e a Ilha Precisa: Um jogo RPG para exercitar a aprendizagem de literatura | Autor: Manuela Bastos, Jeniffer Macena, João Bernardo, Rafaela Melo, Marcela Pessoa, Fernanda Pires
+titulo: Enigma pirata: um jogo para exercitar Matemática e Pensamento Computacional através da Teoria dos Conjuntos | Autor: Raquel Lais, Fabrizio Honda, Fernanda Pires, João Queroga, Marcela Pessoa
+titulo: Hello Food: um jogo para exercitar conceitos de programação e Pensamento Computacional | Autor: Jeniffer Macena, Fernanda Pires, Marcela Pessoa
+titulo: LOGICUBE: Um Artefato de Interação Tangível para Ensino de Pensamento Computacional para Crianças | Autor: Sara Carvalho Coelho Lustosa, Hugo Alcantara da Rocha, Arthur Jatobá Lobo Suzuki, Tatyane S. C. da Silva, Erick Simões, Diogo F. S. Lacerda da Silva, Henrique Foresti
+titulo: Resgate Binário: Um jogo educacional para praticar conversão de números decimais para base binária e Pensamento Computacional | Autor: Fabrizio Honda, Jeniffer Macena, Andreza Mourão
+titulo: Pensar e Vestir: Desenvolvimento do Pensamento Computacional por meio de um Jogo Digital Educacional | Autor: Matheus Soppa Geremias, Taynara Cerigueli Dutra, Eleandro Maschio, Isabela Gasparini
+titulo: CollabProg: Um Repositório Colaborativo Aberto para Apoiar na Adoção de Metodologias Ativas no Ensino de Programação | Autor: Ivanilse Calderon, Klissia Reis, Saulo Silva, Hélio Endrio, Roseno Silva, Miquéias Viana, Symon Cristhian, Williamson Silva, Eduardo Feitosa
+titulo: iVProg4All: uma abordagem de programação visual acessível para pessoas cegas | Autor: Marcos D. do Nascimento, Anarosa A. F. Brandão, Leonidas de O. Brandão, Tiago M. Casal
+titulo: Furbot: mini games para auxiliar no desenvolvimento do Pensamento Computacional | Autor: Mauricio Capobianco Lopes, Luciana P. de Araújo Kohler, Dalton Solano dos Reis, Miguel Alexandre Wisintainer, Maria Fernanda Zimmermann, Martha Lanser Bloemer, Umberto Oliveira de Araújo Neto Leonetti, Leonardo Linhares Silva
+titulo: Mestre dos Sucos: mix de frações - Um Recurso Educacional Digital gamificado para desenvolver habilidades cognitivas e socioemocionais | Autor: Juscileide Braga de Castro, Gabriel Marques do Nascimento, Márcia Duarte Medeiros, Maria de Fátima Costa de Souza, José Aires de Castro Filho
+titulo: O uso das tecnologias digitais para o desenvolvimento do raciocínio geográfico | Autor: Kelly Cristina Onofri, Rosa Elisabete Militz Wypyczynski Martins
+titulo: Uma Proposta para Modelagem de Ecossistemas Educacionais a partir de Experiências de Aprendizagem ao Longo da Vida | Autor: Walber A. R. Beltrame, Annabell D.R. Tamariz
+titulo: Aprendizagem colaborativa auxiliada por computador e inclusão digital: Um método aplicado na educação profissional de jovens e adultos na modalidade EJA (Proeja) | Autor: Flávio L. Da Silva, Anarosa Alves F. Brandão
+titulo: Estratégias de Acessibilidade em IDEs para Estudantes com Deficiência Visual | Autor: Eliana Zen, Tatiana Aires Tavares
+titulo: Aprendizagem Autorregulada em MOOCs por meio de um Painel para Visualização de Dados | Autor: Juliana Cristina dos Santos de Andrade, Márcia Gonçalves de Oliveira, Vanessa Battetin
+titulo: Uma proposta de melhoria dos Processos de Ensino Aprendizagem para Laboratórios Remotos | Autor: Javier Solis-Lastra, Bruno Albertini, Anarosa Brandão
+titulo: Uma proposta de arquitetura computacional para autoria de jogos digitais educacionais com suporte a técnicas de analíticas de aprendizagem - STUDX | Autor: João Gabriel de Matos Dairel, Renan Gonçalves Cattelan, Rafael Dias Araújo
+titulo: Developing a Toolkit for evaluation of gamification in educational environments | Autor: Vinícius Lopes, Seiji Isotani, Diego Dermeval Medeiros da Cunha Matos

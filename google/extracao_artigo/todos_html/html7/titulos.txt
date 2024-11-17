@@ -1,0 +1,14 @@
+titulo: A Cultura Digital e os Algoritmos “presentes” na sala de aula da Educação Básica em Itinerários Formativos | Autor: Marcelo Barbosa Magalhães, Aline Silva De Bona
+titulo: Em direção de Práticas de Elicitação de Requisitos com um jogo em um ambiente de Realidade Virtual usando o próprio dispositivo móvel | Autor: Adilson Vahldick, Luis Felipe Kuster, Ana Fábia Coelho dos Santos, Gustavo Vargas de Andrade, João Marcus Cardoso, Marília Guterres Ferreira, Pablo Schoeffel
+titulo: Tecnologia em Evolução: Ampliando Horizontes na Realidade Aumentada para Professores através daWeb e Detecção de Imagens | Autor: Adilson Vahldick, Ana Fábia Coelho dos Santos, Luis Felipe Kuster, Marília Guterres Ferreira, Pablo Schoeffel
+titulo: Ensino de algoritmos através de atividade híbrida, plugada e desplugada | Autor: Lucas Pinheiro Alves, Aline Silva de Bona
+titulo: O uso de tecnologias digitais na combinação de modelos híbridos para o ensino de função afim | Autor: Kelli Lessa de Souza, Giulia Gonçalves da Silva, Aline Silva de Bona
+titulo: Diretivas para Aplicação de Realidade Aumentada Móvel na Educação | Autor: Alexandre B. Nunes, Gabriel Machado Lunardi, Vinícus Maran
+titulo: Transformando o Processo de Avaliação da Qualidade no Ensino Superior: Uma Proposta Ontológica para a UFRGS | Autor: Eulanda Maria Pedro Daniel, José P. M. de Oliveira, Leandro Krug Wives, Alexandra Lorandi
+titulo: Os fóruns de discussão e o protagonismo discente no ensino de literatura a distância | Autor: Gisele Novaes Frighetto, Luis Rogerio da Silva
+titulo: Criando jogos digitais para pauxiliar o aprendizado de crianças autistas em idade pré-escolar | Autor: Marcelo S. Siedler, Rafael C. Cardoso, Tatiana A. Tavares, Tiago T. Primo
+titulo: Desenvolvimento de um Protótipo de Jogo Sério para Crianças com TDAH | Autor: João P. C. de Sousa, Daiana M. de Oliveira, Marcos A. F. Borges
+titulo: Sobre a elaboração da disciplina Pensamento Computacional e seu oferecimento em ciclo básico universitário no triênio 2020-2021-2022 | Autor: Luis Henrique Ferreira Cardoso de Mello, Cecilia Sosa Arias Peixoto, Marcos Augusto Francisco Borges
+titulo: Tecnologias Utilizadas no Ensino de Matemática para alunos com Transtorno de Déficit de Atenção e Hiperatividade: Uma Revisão Sistemática da Literatura | Autor: Fernando Alves Júnior, Heleno Fülber, Bruno Merlin
+titulo: Concepção de um Jogo Educativo para o Ensino de Física de Partículas Elementares Utilizando a Metodologia Game Design Thinking | Autor: Bruno Costa, Marcus Ribeiro
+titulo: Explorando as estações: Produto Educacional inclusivo para auxiliar o desenvolvimento de crianças com TEA em idade pré-escolar | Autor: Marcelo S. Siedler, Rafael C. Cardoso, Tatiana A. Tavares, Tiago T. Primo

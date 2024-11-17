@@ -1,0 +1,14 @@
+titulo: Block Interchange and Reversal Distance on Unbalanced Genomes | Autor: Alexsandro Oliveira Alexandrino, Gabriel Siqueira, Klairton Lima Brito, Andre Rodrigues Oliveira, Ulisses Dias, Zanoni Dias
+titulo: circTIS: A Weighted Degree String Kernel with Support Vector Machine Tool for Translation Initiation Sites Prediction in circRNA | Autor: Denilson Fagundes Barbosa, Liliane Santana Oliveira, André Yoshiaki Kashiwabara
+titulo: Evaluating the Molecular—Electronic Structure and the Antiviral Effect of Functionalized Heparin on Graphene Oxide Through Ab Initio Computer Simulations and Molecular Docking | Autor: André Flores dos Santos, Mirkos Ortiz Martins, Mariana Zancan Tonel, Solange Binotto Fagan
+titulo: Make No Mistake! Why Do Tools Make Incorrect Long Non-coding RNA Classification? | Autor: Alisson G. Chiquitto, Lucas Otávio L. Silva, Liliane Santana Oliveira, Douglas S. Domingues, Alexandre R. Paschoal
+titulo: Spectrum-Based Statistical Methods for Directed Graphs with Applications in Biological Data | Autor: Victor Chavauty Villela, Eduardo Silva Lira, André Fujita
+titulo: Feature Selection Investigation in Machine Learning Docking Scoring Functions | Autor: Maurício Dorneles Caldeira Balbon, Oscar Emilio Arruda, Adriano V. Werhli, Karina dos Santos Machado
+titulo: Using Natural Language Processing for Context Identification in COVID-19 Literature | Autor: Frederico Carvalho, Diego Mariano, Marcos Bomfim, Giovana Fiorini, Luana Bastos, Ana Paula Abreu, Vivian Paixão, Lucas Santos, Juliana Silva, Angie Puelles, Alessandra Silva, Raquel Cardoso de Melo-Minardi
+titulo: A Framework for Inference and Selection of Cell Signaling Pathway Dynamic Models | Autor: Marcelo Batista, Fabio Montoni, Cristiano Campos, Ronaldo Nogueira, Hugo A. Armelin, Marcelo S. Reis
+titulo: Intentional Semantics for Molecular Biology | Autor: Edward H. Haeusler, Bruno Cuconato, Luiz A. Glatzl, Maria L. Guateque, Diogo M.  Vieira, Elvismary M. de Armas, Fernanda Baião, Marcos Catanho, Antonio B. de Miranda, Sergio Lifschitz
+titulo: Peptide-Protein Interface Classification Using Convolutional Neural Networks | Autor: Lucas Moraes dos Santos, Diego Mariano, Luana Luiza Bastos, Alessandra Gomes Cioletti, Raquel Cardoso de Melo Minardi
+titulo: A Power Law Semantic Similarity from Gene Ontology | Autor: Eric Augusto Ito, Fábio Fernandes da Rocha Vicente, Luiz Felipe Protasio Pereira, Fabricio Martins Lopes
+titulo: Gene Networks Inference by Reinforcement Learning | Autor: Rodrigo Cesar Bonini, David Correa Martins-Jr
+titulo: Exploring Identifiability in Hybrid Models of Cell Signaling Pathways | Autor: Ronaldo N. Sousa, Cristiano G. S. Campos, Willian Wang, Ronaldo F. Hashimoto, Hugo A. Armelin, Marcelo S. Reis
+titulo: transcAnalysis: A Snakemake Pipeline for Differential Expression and Post-transcriptional Modification Analysis | Autor: Pedro H. A. Barros, Waldeyr M. C. Silva, Marcelo M. Brigido

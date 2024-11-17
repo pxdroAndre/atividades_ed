@@ -1,0 +1,14 @@
+palavras-chave: Block Interchange, Reversal, Unbalanced Genomes
+palavras-chave: circRNA, Translation initiation site prediction, Weighted degree string kernel, 													Support vector machine
+palavras-chave: coronavirus, drugs, pandemic
+palavras-chave: Non-coding RNAs, high-throughput sequencing technologies, coding, methods, benchmarking
+palavras-chave: Network Correlation, Graph Statistics, EcoG
+palavras-chave: Rational Drug Design, Molecular Docking, Machine Learning, Feature Selection, Scoring Functions
+palavras-chave: COVID-19, SimplificaSUS, Literature, NLP
+palavras-chave: Cell signaling pathways, Parameter inference, Biochemical reactions, Universal differential equation
+palavras-chave: Palavras-chave não encontradas
+palavras-chave: Convolutional neural networks, distance maps, protein-peptide interactions
+palavras-chave: Semantic similarity, Complex networks, Power-law, Bioinformatics, Pattern Recognition
+palavras-chave: reinforcement learning, gene regulatory networks inference, boolean networks
+palavras-chave: Scientific Machine Learning, First-principle Modeling, Universal Differential Equation, Inverse Problem, Cell Signaling Pathway
+palavras-chave: Pipeline, Differential Gene Expression, Alternative Splicing, RNA Editing
